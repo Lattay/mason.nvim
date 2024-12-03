@@ -10,6 +10,7 @@ local settings = require "mason.settings"
 local spawn = require "mason-core.spawn"
 
 local VENV_DIR = "venv"
+local VENV_MANAGER = "virutalenv"
 
 local M = {}
 
@@ -55,7 +56,7 @@ function M.install(packages)
 
     -- Find first executable that manages to create venv
     local executable = _.find_first(function(executable)
-        return pcall(ctx.spawn[executable], { "-m", "venv", VENV_DIR })
+        return pcall(ctx.spawn[executable], { "-m", VENV_MANAGER, VENV_DIR })
     end, executables)
 
     Optional.of_nilable(executable)
